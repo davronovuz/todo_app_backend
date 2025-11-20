@@ -49,8 +49,12 @@ MIDDLEWARE = [
 ]
 
 
-# CORS sozlamalari
+# CORS sozlamalari – yangi versiya uchun
 CORS_ALLOW_ALL_ORIGINS = True
+
+# Bu qatorni qoʻshing – header takrorlanmasligi uchun
+CORS_EXPOSE_HEADERS = ["*"]
+CORS_ALLOW_CREDENTIALS = False
 
 
 CORS_ALLOW_METHODS = [
@@ -81,7 +85,7 @@ CORS_ALLOW_HEADERS = [
     "x-requested-with",
 ]
 
-CORS_REPLACE_HTTPS_REFERER = True   # ← YANGI QATOR (bu muhim!)
+
 
 ROOT_URLCONF = 'config.urls'
 
