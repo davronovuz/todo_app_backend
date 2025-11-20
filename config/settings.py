@@ -81,7 +81,7 @@ CORS_ALLOW_HEADERS = [
     "x-requested-with",
 ]
 
-
+CORS_REPLACE_HTTPS_REFERER = True   # ← YANGI QATOR (bu muhim!)
 
 ROOT_URLCONF = 'config.urls'
 
