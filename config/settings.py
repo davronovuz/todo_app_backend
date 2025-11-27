@@ -18,8 +18,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # local app
     'todo',
+    'users',
     # third party app
     'rest_framework',
+    'rest_framework.authtoken',
     'drf_yasg',
     # 'corsheaders',  # ← O'CHIRILDI
 ]
@@ -40,7 +42,10 @@ MIDDLEWARE = [
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny',
-    ]
+    ],
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework.authentication.TokenAuthentication",
+    ),
 }
 
 ROOT_URLCONF = 'config.urls'
