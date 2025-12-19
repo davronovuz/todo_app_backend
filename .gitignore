@@ -1,89 +1,117 @@
-# Created by https://www.gitignore.io
-
-### OSX ###
-.DS_Store
-.AppleDouble
-.LSOverride
-
-# Icon must end with two \r
-Icon
-
-
-# Thumbnails
-._*
-
-# Files that might appear on external disk
-.Spotlight-V100
-.Trashes
-
-# Directories potentially created on remote AFP share
-.AppleDB
-.AppleDesktop
-Network Trash Folder
-Temporary Items
-.apdisk
-
-
-### Python ###
-# Byte-compiled / optimized / DLL files
+# ----------------------------------------------------------------------
+# Python & Virtual Environment
+# ----------------------------------------------------------------------
 __pycache__/
 *.py[cod]
-
-# C extensions
+*$py.class
 *.so
-
-# Distribution / packaging
 .Python
-env/
 build/
 develop-eggs/
 dist/
 downloads/
 eggs/
+.eggs/
 lib/
 lib64/
 parts/
 sdist/
 var/
+wheels/
+share/python-wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+MANIFEST
 
-# PyInstaller
-#  Usually these files are written by a python script from a template
-#  before PyInstaller builds the exe, so as to inject date/other infos into it.
-*.manifest
-*.spec
+# Virtual Environments
+venv/
+env/
+ENV/
+.env/
+.venv/
 
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
+# ----------------------------------------------------------------------
+# Django
+# ----------------------------------------------------------------------
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
 
-# Unit test / coverage reports
-htmlcov/
-.tox/
+# Media (User yuklagan fayllar Gitda bo'lmasligi kerak)
+media/
+!media/.gitkeep
+
+# Static (Collectstatic qilingan fayllar serverda yig'iladi)
+staticfiles/
+# Agar siz static fayllarni to'g'ridan-to'g'ri 'static/' papkasiga yig'sangiz:
+# static/
+# Lekin manba (source) static fayllar Gitda turishi kerak!
+
+# ----------------------------------------------------------------------
+# Environment Variables (ENG MUHIMI - XAVFSIZLIK)
+# ----------------------------------------------------------------------
+.env
+.env.prod
+.env.dev
+.env.local
+.env.*
+# Lekin namunani saqlab qolamiz:
+!.env.example
+
+# ----------------------------------------------------------------------
+# Docker
+# ----------------------------------------------------------------------
+# Docker fayllari Gitda turishi kerak, lekin vaqtinchalik narsalar emas:
+docker-compose.override.yml
+
+# ----------------------------------------------------------------------
+# Celery
+# ----------------------------------------------------------------------
+celerybeat-schedule
+celerybeat.pid
+
+# ----------------------------------------------------------------------
+# IDE & Editors
+# ----------------------------------------------------------------------
+# VS Code
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# PyCharm / IntelliJ
+.idea/
+
+# Mac OS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# ----------------------------------------------------------------------
+# Testing & Coverage
+# ----------------------------------------------------------------------
 .coverage
-.cache
+.coverage.*
+htmlcov/
 nosetests.xml
 coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
 
-# Translations
-*.mo
-*.pot
-
-# Sphinx documentation
-docs/_build/
-
-# PyBuilder
-target/
-
-
-### Django ###
-*.log
-*.pot
-*.pyc
-__pycache__/
-local_settings.py
-
-.env
-db.sqlite3
+# ----------------------------------------------------------------------
+# Scripts (Ixtiyoriy: agar bu yordamchi skriptlar kerak bo'lmasa)
+# ----------------------------------------------------------------------
+# setup_project.py
+# fix_apps.py
+# clean_migrations.py

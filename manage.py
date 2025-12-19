@@ -6,7 +6,10 @@ import sys
 
 def main():
     """Run administrative tasks."""
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')
+    # DIQQAT: Quyidagi qatorni o'zgartiring!
+    # 'halol_market.settings' EMAS, 'config.settings.base' bo'lishi kerak
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings.base')
+
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:

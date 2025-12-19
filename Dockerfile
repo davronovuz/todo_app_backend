@@ -1,33 +1,33 @@
-# Python 3.11 slim image'dan foydalanamiz
+# Dockerfile
+
+# Python rasmiy image
 FROM python:3.11-slim
 
-# Working directory o'rnatamiz
+# Ishchi papka
 WORKDIR /app
 
-# System dependencies o'rnatamiz
+# Atrof-muhit o'zgaruvchilari (Python tezroq ishlashi uchun)
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
+# Kerakli tizim kutubxonalarini o'rnatish (Postgres va boshqalar uchun)
 RUN apt-get update && apt-get install -y \
-    gcc \
-    default-libmysqlclient-dev \
-    pkg-config \
+    build-essential \
+    libpq-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# Requirements faylini nusxalaymiz
-COPY requirements.txt .
+# Talablarni o'rnatish
+COPY requirements/base.txt /app/requirements.txt
+RUN pip install --upgrade pip
+RUN pip install -r requirements.txt
+RUN pip install gunicorn
 
-# Python kutubxonalarini o'rnatamiz
-RUN pip install --no-cache-dir -r requirements.txt
+# Loyiha fayllarini ko'chirish
+COPY . /app/
 
-# Loyiha fayllarini nusxalaymiz
-COPY . .
+# Entrypoint skriptini ishga tushirish uchun ruxsat berish
+COPY ./entrypoint.sh /app/entrypoint.sh
+RUN chmod +x /app/entrypoint.sh
 
-# Static fayllarni yig'amiz
-RUN python manage.py collectstatic --noinput
-
-# Migratsiyalarni bajaramiz
-RUN python manage.py migrate --noinput
-
-# 8000 portni ochamiz
-EXPOSE 8000
-
-# Gunicorn bilan ishga tushiramiz
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "--workers", "3", "config.wsgi:application"]
+# Entrypointni ishga tushirish
+ENTRYPOINT ["/app/entrypoint.sh"]
