@@ -1,3 +1,4 @@
+import uuid  # <--- 1. BU IMPORT QO'SHILDI
 from django.db import models
 from apps.core.models import BaseModel
 
@@ -64,9 +65,11 @@ class Product(BaseModel):
 
 
 class ProductImage(models.Model):
-    id = models.UUIDField(primary_key=True, default=models.UUIDField, editable=False)  # Agar BaseModel ishlatilmasa
-    # Yoki shunchaki BaseModel dan meros olamiz agar vaqt kerak bo'lsa.
-    # Sxemada 'created_at' yo'q edi ProductImage da, lekin BaseModel ishlatish qulay.
+    # --- XATO TUZATILDI ---
+    # Eski (Xato): default=models.UUIDField
+    # Yangi (To'g'ri): default=uuid.uuid4
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='images')
     image = models.ImageField(upload_to='products/')
     is_primary = models.BooleanField(default=False)
