@@ -1,16 +1,25 @@
 from rest_framework import viewsets, permissions, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
+from django.utils import timezone  # <-- Bu importni qo'shish shart!
 from .models import Notification, DeviceToken
 from .serializers import NotificationSerializer, DeviceTokenSerializer
-
 
 class NotificationViewSet(viewsets.ModelViewSet):
     serializer_class = NotificationSerializer
     permission_classes = [permissions.IsAuthenticated]
-    http_method_names = ['get', 'patch', 'delete']  # User notification yarata olmaydi
+    http_method_names = ['get', 'patch', 'delete']
 
     def get_queryset(self):
+        # 1. Agar bu Swagger (Docs) bo'lsa -> Bo'sh ro'yxat qaytar
+        if getattr(self, 'swagger_fake_view', False):
+            return Notification.objects.none()
+
+        # 2. Agar foydalanuvchi tizimga kirmagan bo'lsa -> Bo'sh ro'yxat qaytar
+        if self.request.user.is_anonymous:
+            return Notification.objects.none()
+
+        # 3. Asosiy logika: Faqat o'zining bildirishnomalari
         return Notification.objects.filter(user=self.request.user).order_by('-created_at')
 
     @action(detail=True, methods=['post'])
