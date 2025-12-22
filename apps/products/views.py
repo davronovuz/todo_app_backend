@@ -25,6 +25,7 @@ class ProductViewSet(viewsets.ReadOnlyModelViewSet):
     filterset_class = ProductFilter
     search_fields = ['name', 'description', 'sku']
     ordering_fields = ['price', 'created_at', 'sold_count', 'view_count']
+    permission_classes = [permissions.AllowAny]
 
     def get_serializer_class(self):
         if self.action == 'retrieve':
