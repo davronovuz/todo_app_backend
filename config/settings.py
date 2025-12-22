@@ -23,13 +23,13 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'drf_yasg',
-    # 'corsheaders',  # ← O'CHIRILDI
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    # 'corsheaders.middleware.CorsMiddleware',  # ← O'CHIRILDI
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -74,6 +74,11 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+
+CORS_ALLOW_ALL_ORIGINS = True  # Hamma domenlarga ruxsat beradi
+CORS_ALLOW_CREDENTIALS = True  # Cookie va ses
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {
